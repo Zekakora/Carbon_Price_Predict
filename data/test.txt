@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>北京市碳排放权电子交易平台</title>
+<link rel="stylesheet" href="/style/style.css" />
+
+</head>
+
+<body>
+<div class="wrap">
+<!--头部开始-->
+<script type="text/javascript" src="/js/jqueryv.min.js"  ></script>
+<script src="/js/showchildnav.js" type="text/javascript"></script>
+
+ <div class="top">
+   <div class="banner">
+      <p class="banner_l l"><a href="#"><img src="/images/banner11.jpg" /></a></p>
+      <div class="banner_r r">
+      </div>
+   </div>
+   <ul class="nav" id="mainnav">
+     <li><A href="/">首页</A></li>
+     <li><A href="/article/yjzy/">交易指引</A></li>
+     <li><A href="/article/zcfg/">政策法规</A></li>
+     <li><A href="/article/xxzx/">信息资讯</A></li>
+     <li><A href="/article/scyj/">市场研究</A></li>
+     <li><A href="/article/khfw/">客户服务</A></li>
+   </ul>
+ </div>
+<!--div class="subnav">
+    <div id="navchildsbg" class="navchildsbg" style="display: none;"></div>
+    <div class="navchilds" id="navchilds" style="display: none;">
+        <div class="navchild" style="display: none;">null</div>
+        <div style="margin-left: 430px; display: none;" class="navchild" >	<span></span>
+            <a href="/article/yjzy/jygz" id="jygz">交易规则</a>
+            <a href="/article/yjzy/jyxz" id="jyxz">交易细则</a>
+            <a href="/article/yjzy/jylct" id="jylct">交易流程图</a>
+            <a href="/article/yjzy/jyrjxz" id="jyrjxz">交易软件下载</a>
+            <a href="/article/yjzy/bzzn" id="bzzn">办理指南</a>
+
+
+                  </div>
+        <div style="margin-left: 580px; display: none;" id="JJProduct" class="navchild"><span></span>
+                      <a href="/article/zcfg/glbf">北京市碳排放权交易管理办法</a>
+          <a href="/article/zcfg/jyglbf">国家温室气体自愿减排交易管理办法</a>
+
+        </div>
+        <div style="margin-left:725px; display: none;" class="navchild"><span></span>
+           <a href="/article/xxzx/rddt" id="rddt">热点动态</a>
+            <a href="/article/xxzx/jysgg" id="jysgg">交易所公告</a>
+
+
+        </div>
+        <div style="margin-left: 880px; display: none;" class="navchild"><span></span>
+        <a href="/article/scyj/tscbb" id="tscbb">碳市场报告</a>
+        <a href="/article/scyj/zlgd" id="zlgd">专栏观点</a>
+
+
+        </div>
+        <div style="margin-left:700px; display: none;" class="navchild"><span></span>
+
+<a href="/article/khfw/cjwt" id="cjwt">常见问题</a>
+
+<a href="/article/khfw/bdxz" id="bdxz">表单下载</a>
+
+<a href="/article/khfw/sysc" id="sysc">使用手册</a>
+
+<a href="/article/khfw/lxmw" id="lxmw">联系我们</a>
+
+
+        </div>
+   </div-->
+</div>
+
+<!--头部结束-->
+<!--中间开始-->
+ <div class="main">
+   <div class="main_top">
+     <div class="left">
+       <h6 class="jyzd"><A href="#"><img src="/images/hqxx.jpg" /></A></h6>
+              <!--div class="fwtd">
+         <h6>服务通道</h6>
+         <ul class="fwtd_text">
+           <Li><A href="#"><img src="/images/tu01.jpg" /> 新手入门</A></Li>
+           <Li><A href="/article/khfw/bdxz/"><img src="/images/tu03.jpg" /> 表单下载</A></Li>
+           <Li><A href="/article/khfw/cjwt/"><img src="/images/tu02.jpg" /> 常用问题</A></Li>
+           <Li><A href="#"><img src="/images/tu04.jpg" /> 官方微博</A></Li>
+         </ul>
+       </div-->
+       <div class="fwtd">
+         <h6>快速链接</h6>
+         <ul class="ksdh_text">
+           <Li><A href="http://sthjb.sthjj.beijing.gov.cn/tpf/" target="_blank">北京市碳排放权注册登记簿</A></Li>
+          <!-- <Li><A href="http://www.ccb.com/" target="_blank">中国建设银行网上银行</A></Li> -->
+           <Li><A href="https://ccer.bjets.com.cn" target="_blank">国家核证自愿减排交易平台</A></Li>
+	   <Li><A href="https://yzt.beijing.gov.cn/index.html" target="_blank">法人一证通平台</A></Li>
+          
+         </ul>
+       </div>
+
+       
+      
+     </div>
+     
+     <!--右边开始--->
+     <div class="list_right">
+       <p class="list_banner"><Img src="/images/yj_img.jpg" /></p>
+       <div class="loc"><script>
+var colname='行情信息';
+var ecolname='jyxx';
+var colCommentFlag = '1';
+var siteId='www';
+</script>
+当前位置：<a href='/'>首页</a><span>></span> <a  href='/article/jyxx/'>行情信息</a>
+</div>
+       <ul class="listtext">
+         <ul> <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="jyhq_tab">
+  <tr>
+    <th>日期</th>
+    <th>成交量(吨)</th>
+    <th>成交均价(元/吨)</th>
+    <th>成交额(元)</th>
+  </tr>
+
+   <script>
+      currentpage = "1";
+      totalpage = "123";
+    </script><tr><td>2024-02-21</td><td>1000</td><td>115.00</td><td>115,000.00(BEA)</td></tr><tr><td>2024-01-31</td><td>100</td><td>118.00</td><td>11,800.00(BEA)</td></tr><tr><td>2024-01-22</td><td>6200</td><td>105.48</td><td>654,000.00(BEA)</td></tr><tr><td>2024-01-15</td><td>10300</td><td>108.01</td><td>1,112,500.00(BEA)</td></tr><tr><td>2024-01-09</td><td>15000</td><td>69.00</td><td>1,035,000.00(CCER)</td></tr><tr><td>2023-12-22</td><td>79</td><td>111.38</td><td>8,799.00(BEA)</td></tr><tr><td>2023-12-19</td><td>3104</td><td>112.00</td><td>347,648.00(BEA)</td></tr><tr><td>2023-12-13</td><td>130</td><td>72.00</td><td>9,360.00(CCER)</td></tr><tr><td>2023-12-12</td><td>500</td><td>72.00</td><td>36,000.00(CCER)</td></tr><tr><td>2023-12-11</td><td>11</td><td>116.00</td><td>1,276.00(BEA)</td></tr><tr><td>2023-12-08</td><td>2</td><td>72.00</td><td>144.00(CCER)</td></tr><tr><td>2023-12-08</td><td>13899</td><td>115.00</td><td>1,598,385.00(BEA)</td></tr><tr><td>2023-12-07</td><td>800</td><td>107.00</td><td>85,600.00(BEA)</td></tr><tr><td>2023-12-06</td><td>200</td><td>102.00</td><td>20,400.00(BEA)</td></tr><tr><td>2023-12-05</td><td>5532</td><td>85.06</td><td>470,560.00(BEA)</td></tr>
+
+</table>
+</ul>
+       
+       </ul>
+       <p class="page">
+         <style>
+
+.mpage{font-size:12px;text-align:center; padding:15px; clear:both;}
+
+a.cpage:link,a.cpage:visited,a.cpage:hover{color:#cb0000;}
+
+.npagea:link,a.npagea:visited,a.npagea:hover{color:#444;}
+
+.txtpage li{ text-align:left; float:left; padding:15px; font-weight:bold;}
+
+</style>
+
+<script>
+
+function pagewrite(currentpage,totalpage,perpage,d1,d2,lastp,nextp){
+
+  var pclass="class='npage'";
+
+  startpage = (parseInt((currentpage-1)/perpage))*perpage + 1;
+
+  endpage= startpage + perpage -1;
+
+  if(endpage > totalpage){
+
+	 endpage = totalpage;
+
+  }
+
+  if(startpage>1){
+
+	lastpage=startpage-1;
+
+	document.write("<a " + pclass +" href=?"+ lastpage +">"+ lastp +"</a>");
+
+	}
+
+	for(i=startpage;i <= endpage; i++){
+
+	  if(i==currentpage) {
+
+	    pclass="class='cpage'";
+
+	}
+
+	 link='?'+i;
+
+	  if(i==1){link='?';}
+
+      document.write(d1+"<a " + pclass +" href="+link+">" + i + "</a>"+d2);
+
+	   pclass="";
+
+	}
+
+	if(totalpage>endpage){
+
+	nextpage=endpage+1;
+
+	document.write("<a " + pclass +" href=?"+ nextpage +">"+ nextp + "</a>");
+
+	}
+
+}
+
+</script>
+
+<div class="mpage">
+
+<script>
+
+//currentpage=2;
+
+//totalpage=3;
+
+if ( (typeof(currentpage)!='undefined' ) && (typeof(totalpage)!='undefined' ) && (totalpage > 1) ){
+
+pagewrite(currentpage,totalpage,15,'[','] ','<<','>>');
+
+}
+
+</script>
+
+</div>
+       </p>
+     </div>
+    <!--右边结束--->
+   </div>
+  
+  
+<p class="clear"></p>
+
+ </div>
+<!--中间结束--> 
+<!--底部开始-->
+<div  class="bottom">
+ 电话：010-57382571/010-57382552/010-57382549　传真：010-57382500　邮编：101100 <br />
+地址：北京市通州区观音庵街2号院保利大都汇T3六层&nbsp;
+<a href="https://beian.miit.gov.cn/" target="_blank"><font color="white">京ICP备09015338号-13</font></a>&nbsp;&nbsp;<a href="http://www.beian.gov.cn/portal/index.do" target="_blank"><font color="white">京公网安备 11010202007723号</font></a><br/>
+技术支持：<a href="http://www.dwusoft.com/" target="_blank"><font color="white">东吴软件技术（北京）有限公司</font></a>
+ </div>
+
+<script src="/js/dibudw.js" type="text/javascript"></script>
+
+<!--底部结束-->
+</div>
+</body>
+</html>

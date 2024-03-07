@@ -1,0 +1,15 @@
+[<ul class="listtext">
+<ul> <table align="center" border="0" cellpadding="0" cellspacing="1" class="jyhq_tab" width="100%">
+<tr>
+<th>日期</th>
+<th>成交量(吨)</th>
+<th>成交均价(元/吨)</th>
+<th>成交额(元)</th>
+</tr>
+<script>
+      currentpage = "1";
+      totalpage = "123";
+    </script><tr><td>2024-02-21</td><td>1000</td><td>115.00</td><td>115,000.00(BEA)</td></tr><tr><td>2024-01-31</td><td>100</td><td>118.00</td><td>11,800.00(BEA)</td></tr><tr><td>2024-01-22</td><td>6200</td><td>105.48</td><td>654,000.00(BEA)</td></tr><tr><td>2024-01-15</td><td>10300</td><td>108.01</td><td>1,112,500.00(BEA)</td></tr><tr><td>2024-01-09</td><td>15000</td><td>69.00</td><td>1,035,000.00(CCER)</td></tr><tr><td>2023-12-22</td><td>79</td><td>111.38</td><td>8,799.00(BEA)</td></tr><tr><td>2023-12-19</td><td>3104</td><td>112.00</td><td>347,648.00(BEA)</td></tr><tr><td>2023-12-13</td><td>130</td><td>72.00</td><td>9,360.00(CCER)</td></tr><tr><td>2023-12-12</td><td>500</td><td>72.00</td><td>36,000.00(CCER)</td></tr><tr><td>2023-12-11</td><td>11</td><td>116.00</td><td>1,276.00(BEA)</td></tr><tr><td>2023-12-08</td><td>2</td><td>72.00</td><td>144.00(CCER)</td></tr><tr><td>2023-12-08</td><td>13899</td><td>115.00</td><td>1,598,385.00(BEA)</td></tr><tr><td>2023-12-07</td><td>800</td><td>107.00</td><td>85,600.00(BEA)</td></tr><tr><td>2023-12-06</td><td>200</td><td>102.00</td><td>20,400.00(BEA)</td></tr><tr><td>2023-12-05</td><td>5532</td><td>85.06</td><td>470,560.00(BEA)</td></tr>
+</table>
+</ul>
+</ul>]
