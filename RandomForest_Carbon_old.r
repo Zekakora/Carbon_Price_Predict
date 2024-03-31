@@ -8,24 +8,26 @@ library(viridis)
 library(gplots)
 set.seed(123)
 rm(list=ls())
+
 data <- read.xlsx('data/bjtotal.xlsx')
-missing_matrix <- is.na(data)
-missing_matrix_numeric <- apply(missing_matrix,c(1,2),as.integer)
-# missing_matrix_numeric <- data.frame(missing_matrix_numeric)
+
+# missing_matrix <- is.na(data)
+# missing_matrix_numeric <- apply(missing_matrix,c(1,2),as.integer)
+# # missing_matrix_numeric <- data.frame(missing_matrix_numeric)
 data <- na.omit(data)
 data$Time <- as.Date(data$Time)
 data <- mutate_if(data, function(x) !is.Date(x), as.numeric)
 
-iso <- isolation.forest(data, ntrees = 500)
-pre <- predict(iso, data)
-temp <- matrix(missing_matrix_numeric, ncol = ncol(data))
-colors <- c("black", "red")
-# 绘制热图
-dev.off()
-par(mai=c(1,1,1,1))  # 设置边距为 1 英寸
-
-# 绘制热图并拉伸
-heatmap.2(missing_matrix_numeric, Rowv = NA, Colv = NA, col = colors, scale = "none", main = "Missing Values Heatmap", dendrogram = "none", trace = "none", key = FALSE, keysize = NA)
+# iso <- isolation.forest(data, ntrees = 500)
+# pre <- predict(iso, data)
+# temp <- matrix(missing_matrix_numeric, ncol = ncol(data))
+# # colors <- c("black", "red")
+# # 绘制热图
+# dev.off()
+# par(mai=c(1,1,1,1))  # 设置边距为 1 英寸
+#
+# # 绘制热图并拉伸
+# heatmap.2(missing_matrix_numeric, Rowv = NA, Colv = NA, col = colors, scale = "none", main = "Missing Values Heatmap", dendrogram = "none", trace = "none", key = FALSE, keysize = NA)
 
 # old_par <- par
 # par(mfrow=c(4, 5)) # 创建4x4的图形布局

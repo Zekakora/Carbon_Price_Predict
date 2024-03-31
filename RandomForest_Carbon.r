@@ -29,10 +29,11 @@ missingvalue <- function() {
 data <- read.xlsx('data/bjtotal.xlsx')
 data <- na.omit(data)
 data <- data[data$humi != 0,]
-data <- select(data, -time)
-data <- as.data.frame(lapply(data, as.numeric))
+# data <- select(data, -time)
+data[, -which(names(data) == "time")] <- sapply(data[, -which(names(data) == "time")], as.numeric)
+data$time <- as.Date(data$time)
 
-columns_to_process <- c("price", "pm2_5", "pm10", "so2", "complexindex", 'no2')
+columns_to_process <- c("count", "price", "pm2_5", "pm10", "so2", "complexindex", 'no2')
 
 # 循环遍历每一列
 for (col_name in columns_to_process) {
@@ -43,20 +44,37 @@ for (col_name in columns_to_process) {
   data <- data[!(data[, col_name] %in% OutVals), ]
 }
 
+# old_par <- par
+# par(mfrow=c(4, 5)) # 创建4x4的图形布局
 
+
+# # 将数据转换为长格式
+# data_long <- reshape2::melt(data, id.vars = "time")
+#
+# # 创建散点图
+# p<- ggplot(data_long, aes(x = time, y = value)) +
+#   geom_point() +
+#   labs(x = " ", y = " ", title = "Data through Time") +
+#   facet_wrap(~variable, scales = "free") +
+#   theme_minimal()
+# print(p)
+
+
+data <- select(data, -time, -count)
+data <- select(data, open4, open94, close4, close94, pm10, pm2_5, temp, price)
 index <- sort(sample(nrow(data), nrow(data) * .8))
 train_data <- data[index,]
 test_data <- data[-index,]
 
 # 随机森林训练
-price.train.forest <- randomForest(price ~ ., data = train_data, importance = TRUE)
+price.train.forest <- randomForest(price ~ ., data = train_data, importance = TRUE, cv.fold = )
 price.train.forest
-# # 使用训练集，查看预测精度
-# price_predict <- predict(price.train.forest, train_data)
-# result <- price_predict / train_data$price
+# 使用训练集，查看预测精度
+price_predict <- predict(price.train.forest, train_data)
+result <- price_predict / train_data$price
 
 
-imp_draw <- function() {
+# imp_draw <- function() {
   # 绘图参数
   importance_price <- price.train.forest$importance
   importance_plot <- tibble(var = rownames(importance_price),
@@ -101,4 +119,6 @@ imp_draw <- function() {
   # 设置组合图标题字体加粗
   combined_plot$top <- gList(combined_plot$top, top = textGrob("Variables Importance Based on RandomForest Model (without dataeval)", gp = gpar(fontsize = 20, fontface = "bold")))
   # 显示组合图
-  print(combined_plot) }
+  print(combined_plot)
+# }
+
