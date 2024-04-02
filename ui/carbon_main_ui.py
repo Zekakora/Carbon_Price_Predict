@@ -33,6 +33,7 @@ import sys
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+
         self.setupUi(self)
         self.stack_main.setCurrentIndex(0)
         self.pushButton_main_clean.setProperty('class', 'danger')
