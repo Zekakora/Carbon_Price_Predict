@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'carbon.ui'
+# Form implementation generated from reading ui file 'discard_carbon.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #

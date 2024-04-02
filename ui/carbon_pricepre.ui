@@ -114,9 +114,32 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="price_pre_data">
-      <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0">
-       <item row="1" column="2">
-        <widget class="QLabel" name="label_3">
+      <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0">
+       <item row="0" column="0" colspan="5">
+        <widget class="QLabel" name="label_2">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>数据加载</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3" colspan="2">
+        <widget class="QPushButton" name="price_pre_data_input_load_button">
          <property name="font">
           <font>
            <family>等线</family>
@@ -124,57 +147,12 @@
           </font>
          </property>
          <property name="text">
-          <string>数据类型</string>
+          <string>加载数据</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLineEdit" name="filepath_1t">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="4">
-        <widget class="QPushButton" name="price_pre_data_input_load_button_2">
-         <property name="font">
-          <font>
-           <family>等线</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>确认加载</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QComboBox" name="comboBox_datatype">
-         <property name="font">
-          <font>
-           <family>等线</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <item>
-          <property name="text">
-           <string>EXCEL</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>CSV</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>TXT</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="7" column="0" colspan="5">
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item row="9" column="0" colspan="5">
+        <layout class="QVBoxLayout" name="pricepre_load_picarea">
          <property name="spacing">
           <number>3</number>
          </property>
@@ -193,27 +171,69 @@
          </item>
         </layout>
        </item>
-       <item row="6" column="0" colspan="5">
-        <widget class="QLabel" name="label_16">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
            <family>等线</family>
-           <pointsize>12</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>数据图像一览</string>
+          <string>数据类型</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+        </widget>
+       </item>
+       <item row="6" column="4">
+        <widget class="QPushButton" name="price_pre_data_input_load_button_2">
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>确认加载</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLineEdit" name="filepath_1t">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="4">
+        <widget class="QComboBox" name="comboBox_precaldata">
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>是 - 孤立森林</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>否</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>预处理</string>
          </property>
         </widget>
        </item>
@@ -252,84 +272,39 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0" colspan="4">
+       <item row="1" column="4">
+        <widget class="QComboBox" name="comboBox_datatype">
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>EXCEL</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>CSV</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>TXT</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="4">
         <layout class="QGridLayout" name="price_pre_data_checkbox">
          <property name="bottomMargin">
           <number>2</number>
          </property>
         </layout>
        </item>
-       <item row="2" column="3" colspan="2">
-        <widget class="QPushButton" name="price_pre_data_input_load_button">
-         <property name="font">
-          <font>
-           <family>等线</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>加载数据</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="5">
-        <widget class="QLabel" name="label_2">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>等线</family>
-           <pointsize>12</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>数据加载</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <family>等线</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>预处理</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1" colspan="4">
-        <widget class="QComboBox" name="comboBox_precaldata">
-         <property name="font">
-          <font>
-           <family>等线</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <item>
-          <property name="text">
-           <string>是 - 孤立森林</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>否</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="5">
+       <item row="4" column="0" colspan="2">
         <widget class="QLabel" name="label_14">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -345,6 +320,66 @@
          </property>
          <property name="text">
           <string>选择数据列</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="5">
+        <widget class="QLabel" name="label_16">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>数据图像一览</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="5">
+        <widget class="QLabel" name="label_checkbox_notice">
+         <property name="palette">
+          <palette>
+           <active>
+            <colorrole role="WindowText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>85</green>
+               <blue>127</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="WindowText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>85</green>
+               <blue>127</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled/>
+          </palette>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -364,7 +399,6 @@
           <font>
            <family>等线</family>
            <pointsize>12</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -565,7 +599,6 @@
           <font>
            <family>等线</family>
            <pointsize>12</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -795,7 +828,6 @@
           <font>
            <family>等线</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -844,7 +876,6 @@
           <font>
            <family>等线</family>
            <pointsize>12</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -1182,7 +1213,6 @@
           <font>
            <family>等线</family>
            <pointsize>12</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -1214,7 +1244,6 @@
             <font>
              <family>等线</family>
              <pointsize>11</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -1244,7 +1273,6 @@
             <font>
              <family>等线</family>
              <pointsize>11</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -1274,7 +1302,6 @@
             <font>
              <family>等线</family>
              <pointsize>11</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>

@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QMainWindow, QApplication
-from carbon_morden import Ui_MainWindow
+from carbon_mainmenu import Ui_MainWindow
 from carbon_pricepre_logic import price_pre_page
 from PyQt6 import QtCore
-
+import sys
 """
 import sys
 
@@ -29,7 +29,7 @@ app = QtWidgets.QApplication(sys.argv)
 window = QtWidgets.QMainWindow()
 apply_stylesheet(app, theme='light_blue.xml', extra=extra)
 """
-import sys
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -49,7 +49,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def goto_page_main(self, index):
         self.stack_main.setCurrentIndex(index)
-
 
 
 if __name__ == "__main__":

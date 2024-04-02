@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'carbon_morden.ui'
+# Form implementation generated from reading ui file 'carbon_mainmenu.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -7,23 +7,16 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
 import sys
-
-# from qdarkstyle.light.palette import LightPalette
-# app = QtWidgets.QApplication(sys.argv)
-# window = QtWidgets.QMainWindow()
-# import qdarkstyle
-# app.setStyleSheet(qdarkstyle.load_stylesheet(qt_api='PyQt6', palette=LightPalette()))
 
 extra = {
     # Button colors
     'danger': '#dc3545',
     # 'warning': '#ffc107',
-     'warning':'#CD9B1D',
+    'warning': '#CD9B1D',
     'success': '#17a2b8',
     # Font
-    'font_family': '等线',
+    'font_family': ['等线','微软雅黑','楷体'],
     'font_size': '24',
 }
 
@@ -56,7 +49,6 @@ class Ui_MainWindow(object):
         font.setFamily("微软雅黑")
         font.setPointSize(14)
         font.setBold(True)
-        font.setWeight(75)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setWordWrap(False)
@@ -65,36 +57,32 @@ class Ui_MainWindow(object):
         self.pushButton_main_homepage = QtWidgets.QPushButton(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
-        font.setPointSize(10)
+        font.setPointSize(13)
         font.setBold(True)
-        font.setWeight(75)
         self.pushButton_main_homepage.setFont(font)
         self.pushButton_main_homepage.setObjectName("pushButton_main_homepage")
         self.verticalLayout.addWidget(self.pushButton_main_homepage)
         self.pushButton_main_price = QtWidgets.QPushButton(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
-        font.setPointSize(10)
+        font.setPointSize(13)
         font.setBold(True)
-        font.setWeight(75)
         self.pushButton_main_price.setFont(font)
         self.pushButton_main_price.setObjectName("pushButton_main_price")
         self.verticalLayout.addWidget(self.pushButton_main_price)
         self.pushButton_main_count = QtWidgets.QPushButton(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
-        font.setPointSize(10)
+        font.setPointSize(13)
         font.setBold(True)
-        font.setWeight(75)
         self.pushButton_main_count.setFont(font)
         self.pushButton_main_count.setObjectName("pushButton_main_count")
         self.verticalLayout.addWidget(self.pushButton_main_count)
         self.pushButton_main_elec = QtWidgets.QPushButton(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
-        font.setPointSize(10)
+        font.setPointSize(13)
         font.setBold(True)
-        font.setWeight(75)
         self.pushButton_main_elec.setFont(font)
         self.pushButton_main_elec.setObjectName("pushButton_main_elec")
         self.verticalLayout.addWidget(self.pushButton_main_elec)
@@ -103,9 +91,8 @@ class Ui_MainWindow(object):
         self.pushButton_main_clean = QtWidgets.QPushButton(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
-        font.setPointSize(10)
+        font.setPointSize(13)
         font.setBold(True)
-        font.setWeight(75)
         self.pushButton_main_clean.setFont(font)
         self.pushButton_main_clean.setObjectName("pushButton_main_clean")
         self.verticalLayout.addWidget(self.pushButton_main_clean)

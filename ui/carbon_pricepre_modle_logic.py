@@ -10,9 +10,11 @@ def get_data(path, type):
         df = pd.read_csv(path)
     else:
         return 0
+
     df.dropna(inplace=True)
-    data = df.set_index('time', drop=True)
+    # data = df.set_index('time', drop=True)
+    print(df.head(5))
     return df, df.head(3), df.columns
 
 
-# df = get_data_excel('D')
+# df = get_data('D:/OneDrive/Projects/Coding/Dachuang_20232024/data/bjtotal.xlsx','EXCEL')

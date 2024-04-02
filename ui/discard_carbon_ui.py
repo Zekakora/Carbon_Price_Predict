@@ -25,7 +25,7 @@ apply_stylesheet(app, theme='light_blue.xml', extra=extra)
 """
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication
-from carbon import Ui_MainWindow
+from discard_carbon import Ui_MainWindow
 
 from carbon_pricepre_logic import price_pre_page
 

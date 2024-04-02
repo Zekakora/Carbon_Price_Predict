@@ -48,7 +48,6 @@
          <font>
           <family>微软雅黑</family>
           <pointsize>14</pointsize>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -68,8 +67,7 @@
         <property name="font">
          <font>
           <family>微软雅黑</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
+          <pointsize>13</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -83,8 +81,7 @@
         <property name="font">
          <font>
           <family>微软雅黑</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
+          <pointsize>13</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -98,8 +95,7 @@
         <property name="font">
          <font>
           <family>微软雅黑</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
+          <pointsize>13</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -113,8 +109,7 @@
         <property name="font">
          <font>
           <family>微软雅黑</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
+          <pointsize>13</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -141,8 +136,7 @@
         <property name="font">
          <font>
           <family>微软雅黑</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
+          <pointsize>13</pointsize>
           <bold>true</bold>
          </font>
         </property>
