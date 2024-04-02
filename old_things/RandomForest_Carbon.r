@@ -26,7 +26,7 @@ missingvalue <- function() {
 }
 
 # 划分测试集与训练集
-data <- read.xlsx('data/bjtotal.xlsx')
+data <- read.xlsx('../data/bjtotal.xlsx')
 data <- na.omit(data)
 data <- data[data$humi != 0,]
 # data <- select(data, -time)

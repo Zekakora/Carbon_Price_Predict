@@ -9,7 +9,7 @@ library(gplots)
 set.seed(123)
 rm(list=ls())
 
-data <- read.xlsx('data/bjtotal.xlsx')
+data <- read.xlsx('../data/bjtotal.xlsx')
 
 # missing_matrix <- is.na(data)
 # missing_matrix_numeric <- apply(missing_matrix,c(1,2),as.integer)

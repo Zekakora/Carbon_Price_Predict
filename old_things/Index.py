@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 # new = ak.air_quality_hist(city='北京', start_date='20200101', end_date='20231231')
 # new = ak.energy_carbon_domestic()
 # new.to_csv('data/crobon_domestic.csv', index=False)
-new = pd.read_csv('data/crobon_domestic.csv')
+new = pd.read_csv('../data/crobon_domestic.csv')
 print(new)
 plt.plot(new['成交价'])
 plt.show()
