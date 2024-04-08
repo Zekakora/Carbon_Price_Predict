@@ -42,9 +42,11 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         self.filepath_6b.clicked.connect(lambda: self.choosefile(6))
         # self.filepath_7b.clicked.connect(lambda: self.choosefile(7))
 
+
         # self.column_names = None
         self.price_pre_data_input_load_button.clicked.connect(self.getdata)
         self.price_pre_data_input_load_button_2.clicked.connect(self.real_load_and_plot)
+        self.pushButton_start_train.connect(self.train_modle)
         # self.price_pre_data_input_load_button.clicked.connect(lambda: self.getdata(self.filepath_1t.text()))
 
         # 保存的变量
@@ -59,7 +61,7 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         # self.pricepredata_figure = plt.subplots()
         # self.pricepredata_canva = FigureCanvas(self.pricepredata_figure)
 
-        self.pic = Figure(figsize=(1000,300), dpi=35)
+        self.pic = Figure(figsize=(1000,300), dpi=70)
         self.pic.patch.set_facecolor('none')
 
         # 加载区域
@@ -81,6 +83,18 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         Loss.set_xlabel('epoch_num')
         Loss.legend()
 """
+    def train_modle(self):
+        ratio = self.price_pre_modle_lineEdit_1.text()
+        batch_size = self.price_pre_modle_lineEdit_2.text()
+        epochs = self.price_pre_modle_lineEdit_3.text()
+        if batch_size & ratio & epochs:
+            try:
+                carbon_pricepre_modle_logic.train_model(self.df, ratio=ratio, batch_size=batch_size, epochs=epochs)
+
+            except Exception as e:
+                QMessageBox.critical(self, '出错啦', str(e))
+
+
 
     def getdata(self):
         path = self.filepath_1t.text()
@@ -119,14 +133,24 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
             columns = self.get_checked_columns()
             df = self.df[columns]
             num_cols = len(columns)
+
+            cookdata = self.comboBox_precaldata.currentIndex()
+            if cookdata == 0:
+                df = carbon_pricepre_modle_logic.iso_tree(df=df)
+            else:
+                pass
+
+
             for i in range(num_cols):
                 column = columns[i]
                 loaddata_pic = self.pic.add_subplot(num_cols,1,i+1)
-                loaddata_pic.scatter(range(len(df[column])),df[column])
+                loaddata_pic.scatter(range(len(df[column])),df[column], s=5)
                 loaddata_pic.patch.set_facecolor('none')
                 loaddata_pic.set_title(column)
             self.pic.tight_layout()
             self.canva_loaddata.draw()
+
+            self.df = df
 
         except Exception as e:
             QMessageBox.critical(self, '出错啦', str(e))
