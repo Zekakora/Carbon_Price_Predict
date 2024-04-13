@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
-
+from keras.callbacks import Callback
 
 def get_data(path, type):
     if type == 'EXCEL':
@@ -82,7 +82,7 @@ def prepare_data(df, n_in, ratio):
     values = reframed.values
     values = scaler_s.fit_transform(values)
 
-    n_train_hours = int(len(values) * ratio)
+    n_train_hours = int(len(values) * float(ratio))
     train = values[:n_train_hours, :]
     test = values[n_train_hours:, :]
 
@@ -97,21 +97,21 @@ def prepare_data(df, n_in, ratio):
     print(train_x.shape, train_y.shape)
     return train_x, train_y, test_x, test_y
 
-
 class LSTMmodel:
     def __init__(self, input_shape, units=50):
         self.input_shape = input_shape
         self.units = units
         self.model = self.build_model(input_shape)
+        self.history = None
 
     def build_model(self, input_shape, units=100):
         model = Sequential()
-        model.add(LSTM(2560, input_shape=input_shape, return_sequences=True))
+        model.add(LSTM(256, input_shape=input_shape, return_sequences=True))
         model.add(Dropout(0.1))
-        model.add(LSTM(1280, return_sequences=True))  # 添加一个额外的LSTM层
+        model.add(LSTM(128, return_sequences=True))  # 添加一个额外的LSTM层
         model.add(Dropout(0.1))  # 添加Dropout层
         model.add(LSTM(1280))  # 将第二个LSTM层改为32个单元
-        model.add(Dense(units=320, activation='relu', kernel_regularizer=regularizers.l2(0.01)))  # 减少Dense层中的单元数量
+        model.add(Dense(units=32, activation='relu', kernel_regularizer=regularizers.l2(0.01)))  # 减少Dense层中的单元数量
         model.add(Dropout(0.2))  # 保留Dropout层
         model.add(Dense(units=1))
         model.compile(loss='mean_squared_error', optimizer='adam')
@@ -119,8 +119,7 @@ class LSTMmodel:
 
     def train(self, train_x, train_y, epochs=50, batch_size=32, validation_data=None):
         # callbacks = [EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)]
-        self.model.fit(train_x, train_y, epochs=epochs, batch_size=batch_size, validation_data=validation_data)
-        # , callbacks=callbacks)
+        self.history = self.model.fit(train_x, train_y, epochs=epochs, batch_size=batch_size, validation_data=validation_data)
 
     def predict(self, X):
         return self.model.predict(X)
@@ -128,11 +127,39 @@ class LSTMmodel:
     def showmodel(self):
         print(self.model.summary())
 
+    def save(self, path, rename):
+        print(path+'/'+rename+'.h5')
+        self.model.save(path+'/'+rename+'.keras',save_format='tf')
 
-def train_model(df, ratio, batch_size, epochs, mpath, ppath, rename):
+    def get_loss_history(self):
+        loss = self.history.history['loss']
+        val_loss = self.history.history['val_loss']
+        print(self.history.history)
+        return loss, val_loss
+
+def cookdata(df, ratio):
     train_x, train_y, test_x, test_y = prepare_data(df, 90, ratio)
+    return train_x, train_y, test_x, test_y
 
+def train_model(df, ratio, batch_size, epochs, mpath, rename):
+    train_x, train_y, test_x, test_y = prepare_data(df, 90, ratio)
     LSTM_model = LSTMmodel(input_shape=train_x.shape[1:], units=100)
     LSTM_model.train(train_x, train_y, epochs=epochs, batch_size=batch_size, validation_data=(test_x, test_y))
+    loss, val_loss = LSTM_model.get_loss_history()
     LSTM_model.showmodel()
-    pass
+    LSTM_model.save(mpath,rename)
+    return train_x, train_y, test_x, test_y, loss, val_loss
+
+from keras.models import load_model
+
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+def test_model(mpath, data_x, data_y):
+    LoadModel = load_model(mpath)
+    print('123')
+    outresult = LoadModel.predict(data_x)
+
+    mse = mean_squared_error(outresult, data_y)
+    r2 = r2_score(outresult, data_y)
+    mae = mean_absolute_error(outresult, data_y)
+
+    return outresult, mse, r2, mae

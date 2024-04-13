@@ -111,7 +111,7 @@
    <item>
     <widget class="QStackedWidget" name="price_pre_stack">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="price_pre_data">
       <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0">
@@ -433,7 +433,7 @@
             </font>
            </property>
            <property name="text">
-            <string>超参数储存路径</string>
+            <string>超参数储存路径（暂时弃用）</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -520,7 +520,7 @@
             </font>
            </property>
            <property name="text">
-            <string>模型储存路径</string>
+            <string>模型储存路径（含权重）</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -817,28 +817,21 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="price_pre_modle_lossbox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>7</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>等线</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="title">
-          <string>Loss图像</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5"/>
-        </widget>
+        <layout class="QVBoxLayout" name="pricepre_lossarea">
+         <item>
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>5</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
        <item>
         <spacer name="verticalSpacer_5">
@@ -940,7 +933,7 @@
             </font>
            </property>
            <property name="text">
-            <string>模型加载路径</string>
+            <string>功能保留</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1024,7 +1017,7 @@
             </font>
            </property>
            <property name="text">
-            <string>数据加载路径</string>
+            <string>功能保留</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

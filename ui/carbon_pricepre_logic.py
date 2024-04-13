@@ -21,6 +21,7 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
 
     def __init__(self):
         super(price_pre_page, self).__init__()
+
         self.setupUi(self)
         self.price_pre_stack.setCurrentIndex(0)
 
@@ -34,6 +35,7 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         self.pushButton_modletest.clicked.connect(lambda: self.goto_page_pre(3))
         self.pushButton_price_pred.clicked.connect(lambda: self.goto_page_pre(4))
 
+
         self.filepath_1b.clicked.connect(lambda: self.choosefile(1))
         self.filepath_2b.clicked.connect(lambda: self.choosepath(2))
         self.filepath_3b.clicked.connect(lambda: self.choosepath(3))
@@ -42,17 +44,17 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         self.filepath_6b.clicked.connect(lambda: self.choosefile(6))
         # self.filepath_7b.clicked.connect(lambda: self.choosefile(7))
 
-
         # self.column_names = None
         self.price_pre_data_input_load_button.clicked.connect(self.getdata)
         self.price_pre_data_input_load_button_2.clicked.connect(self.real_load_and_plot)
-        self.pushButton_start_train.connect(self.train_modle)
+        self.pushButton_start_train.clicked.connect(self.train_modle)
+        self.pushButton_start_test_modle.clicked.connect(self.test_modle)
         # self.price_pre_data_input_load_button.clicked.connect(lambda: self.getdata(self.filepath_1t.text()))
 
         # 保存的变量
         self.df = None
         self.checkboxes_columns = []
-
+        self.text_x, self.test_y, self.train_x, self.train_y = None, None, None, None
 
         # 绘图画布
         # self.pricepre_load_realcanva = FigureCanvas(plt.Figure())
@@ -61,12 +63,24 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         # self.pricepredata_figure = plt.subplots()
         # self.pricepredata_canva = FigureCanvas(self.pricepredata_figure)
 
-        self.pic = Figure(figsize=(1000,300), dpi=70)
+        self.pic = Figure(figsize=(1000, 300), dpi=70)
         self.pic.patch.set_facecolor('none')
 
+        self.losspic = Figure(figsize=(1000, 300), dpi=100)
+        self.losspic.patch.set_facecolor('none')
+
+        self.testpic = Figure(figsize=(1000, 400), dpi=80)
+        self.testpic.patch.set_facecolor('none')
+
         # 加载区域
+        self.canva_test = FigureCanvas(self.testpic)
+        self.modletest_canva_area.addWidget(self.canva_test)
+
         self.canva_loaddata = FigureCanvas(self.pic)
         self.pricepre_load_picarea.addWidget(self.canva_loaddata)
+
+        self.canva_loss = FigureCanvas(self.losspic)
+        self.pricepre_lossarea.addWidget(self.canva_loss)
 
         """
         self.icloss = Figure(figsize=(5, 4), dpi=100)
@@ -83,18 +97,74 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         Loss.set_xlabel('epoch_num')
         Loss.legend()
 """
+
     def train_modle(self):
-        ratio = self.price_pre_modle_lineEdit_1.text()
-        batch_size = self.price_pre_modle_lineEdit_2.text()
-        epochs = self.price_pre_modle_lineEdit_3.text()
-        if batch_size & ratio & epochs:
-            try:
-                carbon_pricepre_modle_logic.train_model(self.df, ratio=ratio, batch_size=batch_size, epochs=epochs)
+        try:
+            ratio = float(self.price_pre_modle_lineEdit_1.text())
+            batch_size = int(self.price_pre_modle_lineEdit_2.text())
+            epochs = int(self.price_pre_modle_lineEdit_3.text())
+            mpath = self.filepath_2t.text()
+            # ppath = self.filepath_3t.text()
+            rename = self.price_pre_modle_lineEdit_6.text()
+            if all(batch_size and ratio and epochs and mpath and rename):
+                train_x, train_y, test_x, test_y, loss, val_loss = (
+                    carbon_pricepre_modle_logic.train_model
+                    (self.df, ratio=ratio, batch_size=batch_size, epochs=epochs,
+                     mpath=mpath, rename=rename))
+                # print(train_x, train_y, test_x, test_y, loss, val_loss)
+                self.losspic.clf()
+                self.canva_loss.draw()
 
-            except Exception as e:
-                QMessageBox.critical(self, '出错啦', str(e))
+                # 绘图
+                loss_pic = self.losspic.add_subplot(111)
+                loss_pic.plot(range(1, len(loss) + 1), loss, 'r', label='trainloss')
+                loss_pic.plot(range(1, len(loss) + 1), val_loss, 'bo', label='validloss')
+                loss_pic.patch.set_facecolor('none')
+                loss_pic.legend()
+                self.losspic.tight_layout()
+                self.canva_loss.draw()
+        except Exception as e:
+            QMessageBox.critical(self, '出错啦', str(e))
 
+    def test_modle(self):
+        try:
+            ratio = float(self.price_pre_modle_lineEdit_1.text())
+            mpath = self.filepath_4t.text()
+            if ratio and mpath:
+                self.train_x, self.train_y, test_x, test_y = carbon_pricepre_modle_logic.cookdata(self.df, ratio=ratio)
 
+                if (self.comboBox_2.currentIndex == 0):
+                    # self.train_x = train_x
+                    # self.train_y = train_y
+                    data_x = self.train_x
+                    data_y = self.train_y
+                elif (self.comboBox_2.currentIndex == 1):
+                    self.test_x = test_x
+                    self.test_y = test_y
+                    data_x = self.test_x
+                    data_y = self.test_y
+                else:
+                    data_x = self.train_x
+                    data_y = self.train_y
+
+                result, mse, r2, mae = carbon_pricepre_modle_logic.test_model(mpath, data_x, data_y)
+
+                self.testpic.clf()
+                self.canva_test.draw()
+                test_pic = self.testpic.add_subplot(111)
+                test_pic.plot(data_y, 'r', label='Original')
+                test_pic.plot(result, 'b', label='Predict')
+                test_pic.patch.set_facecolor('none')
+                test_pic.legend()
+                self.testpic.tight_layout()
+                self.canva_test.draw()
+
+                self.price_test_RMSE_lable.setText(str(mse))
+                self.price_test_RMSE_lable_2.setText(str(mae))
+                self.price_test_RMSE_lable_3.setText(str(r2))
+
+        except Exception as e:
+            QMessageBox.critical(self, '出错啦', str(e))
 
     def getdata(self):
         path = self.filepath_1t.text()
@@ -128,6 +198,7 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
 
     def real_load_and_plot(self):
         try:
+
             self.pic.clf()
             self.canva_loaddata.draw()
             columns = self.get_checked_columns()
@@ -140,11 +211,10 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
             else:
                 pass
 
-
             for i in range(num_cols):
                 column = columns[i]
-                loaddata_pic = self.pic.add_subplot(num_cols,1,i+1)
-                loaddata_pic.scatter(range(len(df[column])),df[column], s=5)
+                loaddata_pic = self.pic.add_subplot(num_cols, 1, i + 1)
+                loaddata_pic.scatter(range(len(df[column])), df[column], s=5)
                 loaddata_pic.patch.set_facecolor('none')
                 loaddata_pic.set_title(column)
             self.pic.tight_layout()
