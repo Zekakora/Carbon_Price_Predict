@@ -1,7 +1,17 @@
-import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
-from keras.callbacks import Callback
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from pandas import DataFrame
+from pandas import concat
+
+from keras.models import Sequential
+from keras.layers import LSTM, Dense, Dropout
+from keras import regularizers
+from keras.models import load_model
+
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+
 
 def get_data(path, type):
     if type == 'EXCEL':
@@ -28,21 +38,6 @@ def iso_tree(df):
 
 
 # df = get_data('D:/OneDrive/Projects/Coding/Dachuang_20232024/data/bjtotal.xlsx','EXCEL')
-
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
-from pandas import DataFrame
-from pandas import concat
-from keras import regularizers
-from sklearn.metrics import mean_squared_error
-from keras.models import Sequential
-from keras.layers import Dense, Bidirectional, BatchNormalization, Dropout
-from keras.layers import LSTM
-
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
-from keras import regularizers
-from keras.callbacks import EarlyStopping
 
 
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
@@ -97,6 +92,7 @@ def prepare_data(df, n_in, ratio):
     print(train_x.shape, train_y.shape)
     return train_x, train_y, test_x, test_y
 
+
 class LSTMmodel:
     def __init__(self, input_shape, units=50):
         self.input_shape = input_shape
@@ -119,7 +115,8 @@ class LSTMmodel:
 
     def train(self, train_x, train_y, epochs=50, batch_size=32, validation_data=None):
         # callbacks = [EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)]
-        self.history = self.model.fit(train_x, train_y, epochs=epochs, batch_size=batch_size, validation_data=validation_data)
+        self.history = self.model.fit(train_x, train_y, epochs=epochs, batch_size=batch_size,
+                                      validation_data=validation_data)
 
     def predict(self, X):
         return self.model.predict(X)
@@ -128,8 +125,8 @@ class LSTMmodel:
         print(self.model.summary())
 
     def save(self, path, rename):
-        print(path+'/'+rename+'.h5')
-        self.model.save(path+'/'+rename+'.keras',save_format='tf')
+        print(path + '/' + rename + '.h5')
+        self.model.save(path + '/' + rename + '.keras', save_format='tf')
 
     def get_loss_history(self):
         loss = self.history.history['loss']
@@ -137,9 +134,11 @@ class LSTMmodel:
         print(self.history.history)
         return loss, val_loss
 
+
 def cookdata(df, ratio):
     train_x, train_y, test_x, test_y = prepare_data(df, 90, ratio)
     return train_x, train_y, test_x, test_y
+
 
 def train_model(df, ratio, batch_size, epochs, mpath, rename):
     train_x, train_y, test_x, test_y = prepare_data(df, 90, ratio)
@@ -147,12 +146,10 @@ def train_model(df, ratio, batch_size, epochs, mpath, rename):
     LSTM_model.train(train_x, train_y, epochs=epochs, batch_size=batch_size, validation_data=(test_x, test_y))
     loss, val_loss = LSTM_model.get_loss_history()
     LSTM_model.showmodel()
-    LSTM_model.save(mpath,rename)
+    LSTM_model.save(mpath, rename)
     return train_x, train_y, test_x, test_y, loss, val_loss
 
-from keras.models import load_model
 
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 def test_model(mpath, data_x, data_y):
     LoadModel = load_model(mpath)
     print('123')

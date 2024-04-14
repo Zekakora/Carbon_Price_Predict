@@ -1,13 +1,15 @@
-from PyQt6.QtCore import pyqtSignal, QTimer
-from PyQt6.QtWidgets import QFileDialog, QCheckBox, QMessageBox, QLineEdit
-from matplotlib import pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import base64
 
-from carbon_pricepre import Ui_carbon_price_pre_widget
-from qtpy.QtWidgets import QApplication, QWidget
-import carbon_pricepre_modle_logic
+from PyQt6.QtCore import QTimer
+from PyQt6.QtGui import QPixmap, QIcon
+from PyQt6.QtWidgets import QFileDialog, QCheckBox, QMessageBox
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+from qtpy.QtWidgets import QWidget
+
+import carbon_pricepre_modle_logic
+from carbon_pricepre import Ui_carbon_price_pre_widget
+from ui import icons
 
 
 # class MyFigure(FigureCanvas):
@@ -35,7 +37,6 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         self.pushButton_modletest.clicked.connect(lambda: self.goto_page_pre(3))
         self.pushButton_price_pred.clicked.connect(lambda: self.goto_page_pre(4))
 
-
         self.filepath_1b.clicked.connect(lambda: self.choosefile(1))
         self.filepath_2b.clicked.connect(lambda: self.choosepath(2))
         self.filepath_3b.clicked.connect(lambda: self.choosepath(3))
@@ -55,14 +56,9 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
         self.df = None
         self.checkboxes_columns = []
         self.text_x, self.test_y, self.train_x, self.train_y = None, None, None, None
+        self.flag = 0
 
         # 绘图画布
-        # self.pricepre_load_realcanva = FigureCanvas(plt.Figure())
-        # self.pricepre_load_canva.addWidget(self.pricepre_load_realcanva)
-        # self.pricepre_load_realcanva.figure.patch.set_facecolor('none')
-        # self.pricepredata_figure = plt.subplots()
-        # self.pricepredata_canva = FigureCanvas(self.pricepredata_figure)
-
         self.pic = Figure(figsize=(1000, 300), dpi=70)
         self.pic.patch.set_facecolor('none')
 
@@ -100,13 +96,16 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
 
     def train_modle(self):
         try:
-            ratio = float(self.price_pre_modle_lineEdit_1.text())
-            batch_size = int(self.price_pre_modle_lineEdit_2.text())
-            epochs = int(self.price_pre_modle_lineEdit_3.text())
+            ratio = self.price_pre_modle_lineEdit_1.text()
+            batch_size = self.price_pre_modle_lineEdit_2.text()
+            epochs = self.price_pre_modle_lineEdit_3.text()
             mpath = self.filepath_2t.text()
             # ppath = self.filepath_3t.text()
             rename = self.price_pre_modle_lineEdit_6.text()
-            if all(batch_size and ratio and epochs and mpath and rename):
+            if batch_size and ratio and epochs and mpath and rename:
+                ratio = float(ratio)
+                batch_size = int(batch_size)
+                epochs = int(epochs)
                 train_x, train_y, test_x, test_y, loss, val_loss = (
                     carbon_pricepre_modle_logic.train_model
                     (self.df, ratio=ratio, batch_size=batch_size, epochs=epochs,
@@ -123,6 +122,8 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
                 loss_pic.legend()
                 self.losspic.tight_layout()
                 self.canva_loss.draw()
+            else:
+                self.lackdata()
         except Exception as e:
             QMessageBox.critical(self, '出错啦', str(e))
 
@@ -131,21 +132,26 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
             ratio = float(self.price_pre_modle_lineEdit_1.text())
             mpath = self.filepath_4t.text()
             if ratio and mpath:
-                self.train_x, self.train_y, test_x, test_y = carbon_pricepre_modle_logic.cookdata(self.df, ratio=ratio)
-
-                if (self.comboBox_2.currentIndex == 0):
-                    # self.train_x = train_x
-                    # self.train_y = train_y
+                if self.comboBox_2.currentIndex == 0:
+                    if self.flag:
+                        pass
+                    else:
+                        self.train_x, self.train_y, self.test_x, self.test_y = carbon_pricepre_modle_logic.cookdata(
+                            self.df, ratio=ratio)
                     data_x = self.train_x
                     data_y = self.train_y
-                elif (self.comboBox_2.currentIndex == 1):
-                    self.test_x = test_x
-                    self.test_y = test_y
+
+                elif self.comboBox_2.currentIndex == 1:
+                    if self.flag:
+                        pass
+                    else:
+                        self.train_x, self.train_y, self.test_x, self.test_y = carbon_pricepre_modle_logic.cookdata(
+                            self.df, ratio=ratio)
                     data_x = self.test_x
                     data_y = self.test_y
+
                 else:
-                    data_x = self.train_x
-                    data_y = self.train_y
+                    QMessageBox.information(self, '暂时不支持')
 
                 result, mse, r2, mae = carbon_pricepre_modle_logic.test_model(mpath, data_x, data_y)
 
@@ -162,6 +168,8 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
                 self.price_test_RMSE_lable.setText(str(mse))
                 self.price_test_RMSE_lable_2.setText(str(mae))
                 self.price_test_RMSE_lable_3.setText(str(r2))
+            else:
+                self.lackdata()
 
         except Exception as e:
             QMessageBox.critical(self, '出错啦', str(e))
@@ -195,6 +203,28 @@ class price_pre_page(QWidget, Ui_carbon_price_pre_widget):
                 self.price_pre_data_checkbox.addWidget(checkbox, row, column)
         except Exception as e:
             QMessageBox.critical(self, '出错啦', str(e))
+
+    def lackdata(self):
+        # 将base64编码的图像数据解码为字节数据
+        icon_bytes = base64.b64decode(icons.icon1)
+        # 将字节数据转换为QPixmap
+        pixmap = QPixmap()
+        pixmap.loadFromData(icon_bytes)
+        # 将QPixmap转换为QIcon
+        icon = QIcon(pixmap)
+
+        msg_box = QMessageBox()
+        msg_box.setWindowIcon(icon)  # 设置窗口图标
+        msg_box.setIconPixmap(pixmap)  # 设置消息框图标
+        msg_box.setWindowTitle('出错啦')
+        msg_box.setText('请检查输入数据（此对话框会自动关闭）')
+        msg_box.setIcon(QMessageBox.Icon.Information)  # 设置图标
+        # 创建一个定时器，3秒后关闭消息框
+        timer = QTimer(msg_box)
+        timer.setSingleShot(True)
+        timer.timeout.connect(msg_box.accept)
+        timer.start(1500)  # 1500毫秒后关闭消息框
+        msg_box.exec()
 
     def real_load_and_plot(self):
         try:

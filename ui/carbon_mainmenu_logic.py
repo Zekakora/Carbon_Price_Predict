@@ -1,8 +1,10 @@
+import sys
+
 from PyQt6.QtWidgets import QMainWindow, QApplication
+
 from carbon_mainmenu import Ui_MainWindow
 from carbon_pricepre_logic import price_pre_page
-from PyQt6 import QtCore
-import sys
+
 """
 import sys
 
